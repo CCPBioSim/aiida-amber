@@ -34,7 +34,7 @@ jobs:
       run: pytest -s --cov aiida_amber --cov-report term-missing --cov-append .
 
     - name: Report Coverage
-      uses: coverallsapp/github-action@v2.3.6
+      uses: coverallsapp/github-action@v2.3.7
 
   docs:
     runs-on: ubuntu-24.04
