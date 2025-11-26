@@ -13,6 +13,7 @@ readme = "README.md"
 license = {file = "LICENSE"}
 classifiers = [
     "Programming Language :: Python",
+    "Programming Language :: Python :: 3.11",
     "Intended Audience :: Science/Research",
     "License :: OSI Approved :: MIT License",
     "Natural Language :: English",
@@ -28,7 +29,7 @@ dependencies = [
 ]
 
 [project.urls]
-Source = "https://github.com/PSDI-UK/aiida-amber"
+Source = "https://github.com/CCPBioSim/aiida-amber"
 
 [project.optional-dependencies]
 testing = [

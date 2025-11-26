@@ -1,5 +1,5 @@
-[![Build Status](https://github.com/PSDI-UK/aiida-amber/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/PSDI-UK/aiida-amber/actions/workflows/ci.yml)
-[![Coverage Status](https://coveralls.io/repos/github/PSDI-UK/aiida-amber/badge.svg?branch=main)](https://coveralls.io/github/PSDI-UK/aiida-amber?branch=main)
+[![Build Status](https://github.com/CCPBioSim/aiida-amber/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/CCPBioSim/aiida-amber/actions/workflows/ci.yml)
+[![Coverage Status](https://coveralls.io/repos/github/CCPBioSim/aiida-amber/badge.svg?branch=main)](https://coveralls.io/github/CCPBioSim/aiida-amber?branch=main)
 [![Docs status](https://readthedocs.org/projects/aiida-amber/badge)](http://aiida-amber.readthedocs.io/)
 [![PyPI version](https://badge.fury.io/py/aiida-amber.svg)](https://badge.fury.io/py/aiida-amber)
 
