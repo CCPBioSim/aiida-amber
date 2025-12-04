@@ -204,6 +204,14 @@ htmlhelp_basename = "aiida-amber-doc"
 nitpick_ignore = [
     ("py:class", "Logger"),
     ("py:class", "QbFields"),
+    ("py:class", "aiida.orm.nodes.data.code.installed.InstalledCode"),
+    ("py:class", "aiida.orm.computers.Computer"),
+    ("py:class", "aiida.engine.processes.calcjobs.calcjob.CalcJob"),
+    ("py:class", "aiida.orm.nodes.data.dict.Dict"),
+    ("py:class", "aiida.parsers.parser.Parser"),
+    ("py:class", "aiida.orm.nodes.data.singlefile.SinglefileData"),
+    ("py:class", "aiida.orm.nodes.process.process.ProcessNode"),
+    ("py:class", "aiida.orm.querybuilder.QueryBuilder"),
 ]
 
 
