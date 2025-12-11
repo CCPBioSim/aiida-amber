@@ -27,10 +27,11 @@ jobs:
       run: |
           verdi presto
           verdi status
+          pip install -e .[testing]
 
-    - name: Install aiida-amber and its testing dependencies
+    #- name: Install aiida-amber and its testing dependencies
       #shell: bash
-      run: pip install -e .[testing]
+      #run: pip install -e .[testing]
 
     - name: Run test suite
       #shell: bash
