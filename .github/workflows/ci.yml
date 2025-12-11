@@ -27,14 +27,13 @@ jobs:
       run: |
           verdi presto
           verdi status
-          pip install -e .[testing]
 
-    #- name: Install aiida-amber and its testing dependencies
-      #shell: bash
-      #run: pip install -e .[testing]
+    - name: Install aiida-amber and its testing dependencies
+      shell: _entrypoint.sh /bin/bash --noprofile --norc -eo pipefail {0}
+      run: pip install -e .[testing]
 
     - name: Run test suite
-      #shell: bash
+      shell: _entrypoint.sh /bin/bash --noprofile --norc -eo pipefail {0}
       run: pytest -s --cov aiida_amber --cov-report term-missing --cov-append .
 
     - name: Report Coverage
