@@ -19,7 +19,6 @@ jobs:
         image: ghcr.io/ccpbiosim/aiida-amber-testenv:${{ matrix.container }}
     name: ${{ matrix.container }}
     steps:
-    
     - name: checkout
       uses: actions/checkout@v6.0.1
 
@@ -30,11 +29,11 @@ jobs:
           verdi status
 
     - name: Install aiida-amber and its testing dependencies
-      shell: bash
+      #shell: bash
       run: pip install -e .[testing]
 
     - name: Run test suite
-      shell: bash
+      #shell: bash
       run: pytest -s --cov aiida_amber --cov-report term-missing --cov-append .
 
     - name: Report Coverage
