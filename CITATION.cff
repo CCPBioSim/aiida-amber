@@ -18,6 +18,11 @@ authors:
     email: james.gebbie@stfc.ac.uk
     affiliation: 'STFC, Scientific Computing'
     orcid: 'https://orcid.org/0000-0001-8271-3431'
+  - given-names: Harry
+    family-names: Swift
+    email: harry.swift@stfc.ac.uk
+    affiliation: 'STFC, Scientific Computing'
+    orcid: 'https://orcid.org/0009-0007-3323-753X'
 repository-code: 'https://github.com/CCPBioSim/aiida-amber'
 url: 'https://aiida-amber.readthedocs.io/en/latest/'
 abstract: >-
