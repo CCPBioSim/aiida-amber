@@ -203,7 +203,7 @@ htmlhelp_basename = "aiida-amber-doc"
 # We should ignore any python built-in exception, for instance
 nitpick_ignore = [
     ("py:class", "Logger"),
-    ("py:class", "QbFields"),
+    ("py:class", "aiida.orm.fields.QbFields"),
     ("py:class", "aiida.orm.nodes.data.code.installed.InstalledCode"),
     ("py:class", "aiida.orm.computers.Computer"),
     ("py:class", "aiida.engine.processes.calcjobs.calcjob.CalcJob"),
