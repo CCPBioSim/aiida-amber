@@ -88,7 +88,7 @@ aiida_parmed = "aiida_amber.cli.parmed:cli"
 [tool.flit.module]
 name = "aiida_amber"
 
-[tool.pylint.forat]
+[tool.pylint.format]
 max-line-length = 125
 
 [tool.pylint.messages_control]
