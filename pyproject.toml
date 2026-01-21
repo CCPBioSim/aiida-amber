@@ -42,7 +42,10 @@ testing = [
 ]
 pre-commit = [
     "pre-commit~=3.3",
-    "pylint~=3.2.3"
+    "pylint~=3.2.3",
+    "pyupgrade~=3.21.2",
+    "isort~=7.0.0",
+    "black~=26.1.0"
 ]
 docs = [
     "sphinx",
@@ -87,7 +90,7 @@ aiida_parmed = "aiida_amber.cli.parmed:cli"
 [tool.flit.module]
 name = "aiida_amber"
 
-[tool.pylint.format]
+[tool.pylint.forat]
 max-line-length = 125
 
 [tool.pylint.messages_control]
