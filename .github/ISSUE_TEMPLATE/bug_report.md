@@ -1,38 +1,70 @@
 ---
 name: Bug report
 about: Create a report to help us improve
-title: ''
-labels: ''
+title: '[Bug]: '
+labels: bug
 assignees: ''
 
 ---
 
-**Describe the bug**
-A clear and concise description of what the bug is.
+# Bug Report
+<!-- A clear and concise description of the issue. -->
 
-**To Reproduce**
-Steps to reproduce the behavior:
-1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
+---
 
-**Expected behavior**
-A clear and concise description of what you expected to happen.
+## To Reproduce
+<!-- Provide the YAML configuration and the exact CLI command that reproduces the issue. -->
 
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
+### YAML configuration
+<!-- Paste the YAML file or the smallest excerpt that reproduces the issue.
+Remove unrelated fields to make it minimal. -->
+```yaml
+# Paste the YAML snippet here
+```
 
-**Desktop (please complete the following information):**
- - OS: [e.g. iOS]
- - Browser [e.g. chrome, safari]
- - Version [e.g. 22]
+### CLI command used
+<!-- Write the exact command used, for example:   -->
+```bash
+# Paste the CLI command here
+```
 
-**Smartphone (please complete the following information):**
- - Device: [e.g. iPhone6]
- - OS: [e.g. iOS8.1]
- - Browser [e.g. stock browser, safari]
- - Version [e.g. 22]
+### Actual output
+<!-- Paste the output, logs, or error messages here -->
+```bash
+# Paste the output, logs, or error messages here
+```
 
-**Additional context**
-Add any other context about the problem here.
+### Expected output
+<!-- Describe what you expected to see instead -->
+
+---
+
+## Environment and Versions
+
+- Operating System:
+- Package Version:
+- Python Version:
+- Package list:
+  - If using conda, run: `conda list > packages.txt` and paste the contents here.
+
+    ``` bash
+    # Paste packages.txt here
+    ```
+
+  - If using venv/pip, run: `pip list > packages.txt` and paste the contents here.
+
+    ``` bash
+    # Paste packages.txt here
+    ```
+
+---
+
+## Screenshots or Logs
+
+<!-- Attach any relevant screenshots, logs, or stack traces. -->
+
+---
+
+## Additional Context
+
+<!-- Include anything else that might help reproduce or understand the bug, such as changes from a previously working version. -->
