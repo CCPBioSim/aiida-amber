@@ -43,9 +43,7 @@ testing = [
 pre-commit = [
     "pre-commit~=3.3",
     "pylint~=3.2.3",
-    "pyupgrade~=3.21.2",
-    "isort~=7.0.0",
-    "black~=26.1.0"
+    "pytest~=7.3",
 ]
 docs = [
     "sphinx",
