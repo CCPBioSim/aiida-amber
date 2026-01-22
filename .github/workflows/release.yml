@@ -51,7 +51,6 @@ jobs:
 
       - name: Change version in repo and CITATION.cff
         run: |
-
           # Update Python package version
           sed -i "s/__version__ =.*/__version__ = \"${{ github.event.inputs.version }}\"/g" aiida_amber/__init__.py
 
