@@ -41,7 +41,7 @@ testing = [
     "pytest-sugar~=0.9"
 ]
 pre-commit = [
-    "pre-commit~=3.3",
+    "pre-commit~=4.5",
     "pylint~=3.3.9",
     "pytest~=7.3",
 ]
