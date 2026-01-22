@@ -56,10 +56,10 @@ jobs:
           sed -i "s/__version__ =.*/__version__ = \"${{ github.event.inputs.version }}\"/g" aiida_amber/__init__.py
 
           # Update CITATION.cff version and date-released
-            if [ -f CITATION.cff ]; then
-              sed -i -E "s/^(version:\s*).*/\1${{ github.event.inputs.version }}/" CITATION.cff
-              sed -i -E "s/^(date-released:\s*).*/\1'$(date -u +%F)'/" CITATION.cff
-            fi
+          if [ -f CITATION.cff ]; then
+            sed -i -E "s/^(version:\s*).*/\1${{ github.event.inputs.version }}/" CITATION.cff
+            sed -i -E "s/^(date-released:\s*).*/\1'$(date -u +%F)'/" CITATION.cff
+          fi
 
       - name: send PR
         id: pr_id
