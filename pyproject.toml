@@ -37,7 +37,7 @@ testing = [
     "wheel~=0.40",
     "coverage[toml]",
     "pytest~=7.3",
-    "pytest-cov~=4.0",
+    "pytest-cov~=7.0",
     "pytest-sugar~=0.9"
 ]
 pre-commit = [
