@@ -42,7 +42,7 @@ testing = [
 ]
 pre-commit = [
     "pre-commit~=4.5",
-    "pylint~=3.3.9",
+    "pylint~=4.0.4",
     "pytest~=9.0",
 ]
 docs = [
