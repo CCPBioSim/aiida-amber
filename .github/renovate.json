@@ -9,7 +9,7 @@
   "pep621": {
     "enabled": true
   },
-  "rangeStrategy": "replace",
+  "rangeStrategy": "in-range-only",
   "schedule": ["* 8 * * 1-5"],
   "labels": ["dependencies"],
   "packageRules": [
@@ -17,5 +17,6 @@
       "matchUpdateTypes": ["minor", "patch"],
       "automerge": false
     }
-  ]
+  ],
+  "dependencyDashboard": true
 }
