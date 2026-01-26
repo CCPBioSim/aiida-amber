@@ -14,15 +14,14 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python: [3.11]
         aiida: [2.6.1, 2.6.2, 2.6.3]
-        container: [2026-01-26-ambertools25]
+        container: [2026-01-26-py3.11-ambertools25]
     continue-on-error: false
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     container:
         image: ghcr.io/ccpbiosim/aiida-amber-testenv:${{ matrix.container }}
-    name: py${{ matrix.python }}-aiida${{ matrix.aiida }}-${{ matrix.container }}
+    name: aiida${{ matrix.aiida }}-${{ matrix.container }}
     steps:
     - name: checkout
       uses: actions/checkout@v6.0.1
@@ -30,7 +29,7 @@ jobs:
     - name: Add mamba packages
       shell: bash
       run: |
-          mamba install -c conda-forge mamba python=${{ matrix.python }} aiida-core=${{ matrix.aiida }} aiida-core.services=${{ matrix.aiida }}
+          mamba install -c conda-forge mamba aiida-core=${{ matrix.aiida }} aiida-core.services=${{ matrix.aiida }}
 
     - name: Start AiiDA with a test profile
       shell: bash
