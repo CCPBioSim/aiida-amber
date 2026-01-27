@@ -15,7 +15,7 @@ jobs:
       fail-fast: false
       matrix:
         aiida: [2.6.1, 2.6.2, 2.6.3]
-        container: [2026-01-26-py3.11-ambertools25]
+        container: [2026-01-27-py3.11-ambertools24]
     continue-on-error: false
     runs-on: ubuntu-24.04
     timeout-minutes: 30
