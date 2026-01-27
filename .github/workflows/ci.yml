@@ -12,21 +12,32 @@ jobs:
 
   tests:
     strategy:
+      fail-fast: false
       matrix:
-        container: [2025-02-10-aiida2.6.1-py3.11.0-amber24,
-                    2025-02-10-aiida2.6.2-py3.11.0-amber24,
-                    2025-02-10-aiida2.6.3-py3.11.0-amber24]
+        aiida: [2.6.1, 2.6.2, 2.6.3]
+        container: [2026-01-27-py3.11-ambertools24]
+    continue-on-error: false
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     container:
-        image: harbor.stfc.ac.uk/psdi-pathfinder4/aiida-testbase:${{ matrix.container }}
-    name: ${{ matrix.container }}
+        image: ghcr.io/ccpbiosim/aiida-amber-testenv:${{ matrix.container }}
+    name: aiida${{ matrix.aiida }}-${{ matrix.container }}
     steps:
-    - uses: actions/checkout@v6.0.1
+    - name: checkout
+      uses: actions/checkout@v6.0.1
+
+    - name: Add mamba packages
+      shell: bash
+      run: |
+          mamba install -c conda-forge mamba aiida-core=${{ matrix.aiida }} aiida-core.services=${{ matrix.aiida }}
 
     - name: Start AiiDA with a test profile
       shell: bash
-      run: /home/aiida/aiida-start
+      run: |
+          rabbitmq-server -detached
+          sleep 5
+          verdi presto
+          verdi status
 
     - name: Install aiida-amber and its testing dependencies
       shell: bash
