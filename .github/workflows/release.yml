@@ -75,6 +75,13 @@ jobs:
           signoff: false
           draft: false
 
+      - name: auto approve review
+        uses: hmarr/auto-approve-action@f0939ea97e9205ef24d872e76833fa908a770363 # v4.0.0
+        with:
+          pull-request-number: ${{ steps.pr_id.outputs.pull-request-number }}
+          review-message: "Auto approved version bump PR"
+          github-token: ${{ secrets.AUTO_PR_MERGE }}
+
       - name: merge PR
         run: gh pr merge --merge --delete-branch --auto "${{ steps.pr_id.outputs.pull-request-number }}"
         env:
