@@ -3,7 +3,7 @@
 |----------------|--------|
 | **Build**      | [![Build Status](https://github.com/CCPBioSim/aiida-amber/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/CCPBioSim/aiida-amber/actions/workflows/ci.yml) |
 | **Documentation** | [![Docs status](https://readthedocs.org/projects/aiida-amber/badge)](http://aiida-amber.readthedocs.io/) |
-| **Citation**      | [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18400804.svg)](https://doi.org/10.5281/zenodo.18400804) |
+| **Citation**      | [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18400803.svg)](https://doi.org/10.5281/zenodo.18400803) |
 | **PyPI**       | ![PyPI - Status](https://img.shields.io/pypi/status/aiida-amber?logo=pypi&logoColor=white) [![PyPI version](https://badge.fury.io/py/aiida-amber.svg)](https://badge.fury.io/py/aiida-amber)  ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/aiida-amber) ![PyPI - Total Downloads](https://img.shields.io/pepy/dt/aiida-amber?logo=pypi&logoColor=white&color=blue) ![PyPI - Monthly Downloads](https://img.shields.io/pypi/dm/aiida-amber?logo=pypi&logoColor=white&color=blue)|
 | **Quality**    | [![Coverage Status](https://coveralls.io/repos/github/CCPBioSim/aiida-amber/badge.svg?branch=main)](https://coveralls.io/github/CCPBioSim/aiida-amber?branch=main) |
 
