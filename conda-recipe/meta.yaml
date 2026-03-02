@@ -1,0 +1,43 @@
+{% set name = "aiida-amber" %}
+{% set version = "2.1.0" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  path: ..
+
+outputs:
+  - name: {{ name }}
+    build:
+      noarch: python
+      script: python -m pip install . -vv
+      entry_points:
+        - aiida_sander=aiida_amber.cli.sander:cli
+        - aiida_tleap=aiida_amber.cli.tleap:cli
+        - aiida_antechamber=aiida_amber.cli.antechamber:cli
+        - aiida_pdb4amber=aiida_amber.cli.pdb4amber:cli
+        - aiida_parmed=aiida_amber.cli.parmed:cli
+    requirements:
+      host:
+        - python
+        - pip
+        - flit-core >=3.4,<4
+      run:
+        - python
+        - aiida-core >=2.6.1,<=2.6.3
+        - voluptuous
+        - mdanalysis >=2.7,<3
+    about:
+      home: https://github.com/CCPBioSim/aiida-amber
+      license: MIT
+      license_file: LICENSE
+      summary: AiiDA plugin that wraps amber molecular dynamics executables
+
+test:
+  imports:
+    - aiida_amber
+  commands:
+    - aiida_sander --help
+    - python -c "import aiida_amber; print(aiida_amber.__version__)"
