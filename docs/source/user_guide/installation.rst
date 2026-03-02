@@ -35,3 +35,21 @@ To install the AiiDA-amber plugin, activate the conda environment created previo
 
     conda activate aiida-2.4.0
     pip install aiida-amber
+
+Alternative Installation via Conda
+++++++++++++++++++++++++++++++++++
+
+The AiiDA-Amber plugin is also available via the CCPBioSim Anaconda channel.
+
+To install using Conda:
+
+.. code-block:: bash
+
+    conda activate aiida-2.4.0
+    conda install -c CCPBioSim aiida-amber
+
+Or using mamba:
+
+.. code-block:: bash
+
+    mamba install -c CCPBioSim aiida-amber
