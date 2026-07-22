@@ -14,9 +14,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python: [3.11]
+        python: [3.12]
         aiida: [2.6.1, 2.6.2, 2.6.3]
-        ambertools: [24.8]
+        ambertools: [25.3]
     continue-on-error: false
     runs-on: ubuntu-24.04
     timeout-minutes: 30
