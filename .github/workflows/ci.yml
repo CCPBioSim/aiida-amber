@@ -25,10 +25,17 @@ jobs:
     - name: checkout
       uses: actions/checkout@v6.0.1
 
+    - uses: conda-incubator/setup-miniconda@v4
+      with:
+        auto-update-conda: true
+        auto-activate: true
+        activate-environment: ""
+        python-version: ${{ matrix.python }}
+
     - name: Add mamba packages
       shell: bash
       run: |
-          mamba install -c conda-forge mamba python=${{ matrix.python }} aiida-core=${{ matrix.aiida }} aiida-core.services=${{ matrix.aiida }} ambertools=${{ matrix.ambertools }}
+          conda install -c conda-forge aiida-core=${{ matrix.aiida }} aiida-core.services=${{ matrix.aiida }} ambertools=${{ matrix.ambertools }}
 
     - name: Start AiiDA with a test profile
       shell: bash
