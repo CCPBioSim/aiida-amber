@@ -29,7 +29,7 @@ jobs:
       with:
         auto-update-conda: true
         auto-activate: true
-        activate-environment: ""
+        activate-environment: tests
         python-version: ${{ matrix.python }}
 
     - name: Add mamba packages
