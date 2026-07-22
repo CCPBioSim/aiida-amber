@@ -33,12 +33,12 @@ jobs:
         conda-remove-defaults: "true"
 
     - name: Add conda packages
-      shell: bash
+      shell: bash -el {0}
       run: |
           conda install -c conda-forge aiida-core=${{ matrix.aiida }} aiida-core.services=${{ matrix.aiida }} ambertools=${{ matrix.ambertools }}
 
     - name: Start AiiDA with a test profile
-      shell: bash
+      shell: bash -el {0}
       run: |
           rabbitmq-server -detached
           sleep 5
@@ -46,11 +46,11 @@ jobs:
           verdi status
 
     - name: Install aiida-amber and its testing dependencies
-      shell: bash
+      shell: bash -el {0}
       run: pip install -e .[testing]
 
     - name: Run test suite
-      shell: bash
+      shell: bash -el {0}
       run: pytest -s --cov aiida_amber --cov-report term-missing --cov-append .
 
     - name: Report Coverage
