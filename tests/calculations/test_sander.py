@@ -69,7 +69,7 @@ def test_file_name_match(sander_code):
 
     result = run_sander(sander_code)
 
-    assert result["stdout"].list_object_names()[0] == "sander.out"
-    assert result["mdinfo"].list_object_names()[0] == "01_Min.mdinfo"
-    assert result["mdout"].list_object_names()[0] == "01_Min.out"
-    assert result["restrt"].list_object_names()[0] == "01_Min.ncrst"
+    assert result["stdout"].base.repository.list_object_names()[0] == "sander.out"
+    assert result["mdinfo"].base.repository.list_object_names()[0] == "01_Min.mdinfo"
+    assert result["mdout"].base.repository.list_object_names()[0] == "01_Min.out"
+    assert result["restrt"].base.repository.list_object_names()[0] == "01_Min.ncrst"

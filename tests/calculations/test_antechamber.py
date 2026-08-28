@@ -61,5 +61,7 @@ def test_file_name_match(antechamber_code):
 
     result = run_antechamber(antechamber_code)
 
-    assert result["stdout"].list_object_names()[0] == "antechamber.out"
-    assert result["output_file"].list_object_names()[0] == "LigandA.mol2"
+    assert result["stdout"].base.repository.list_object_names()[0] == "antechamber.out"
+    assert (
+        result["output_file"].base.repository.list_object_names()[0] == "LigandA.mol2"
+    )
