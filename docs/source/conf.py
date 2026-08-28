@@ -220,6 +220,9 @@ nitpick_ignore = [
     ('py:class', 'aiida.orm.nodes.data.singlefile.SinglefileData.WriteModel'),
 ]
 
+nitpick_ignore_regex = [
+    (r'py:class', r'.*\.(AttributesModel|ReadModel|WriteModel|ConstructorModel|Model)'),
+]
 
 def run_apidoc(_):
     """Runs sphinx-apidoc when building the documentation.
