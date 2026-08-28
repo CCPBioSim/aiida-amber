@@ -38,7 +38,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        conda install -c conda-forge python=${{ matrix.python }} aiida-core=${{ matrix.aiida }} ambertools=${{ matrix.ambertools }}=cuda_None_nompi_*
+        conda install -c conda-forge python=${{ matrix.python }} aiida-core=${{ matrix.aiida }} ambertools=${{ matrix.ambertools }}
 
     - name: Install aiida-amber to test
       run: |
