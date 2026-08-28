@@ -10,7 +10,7 @@ def clear_database_auto(aiida_profile_clean):  # pylint: disable=unused-argument
 
 
 @pytest.fixture(scope="function")
-def gromacs_code(aiida_code, aiida_localhost):
+def sander_code(aiida_code, aiida_localhost):
     """Get sander code."""
     return aiida_code(
         "core.code.installed",
@@ -21,7 +21,7 @@ def gromacs_code(aiida_code, aiida_localhost):
 
 
 @pytest.fixture(scope="function")
-def gromacs_code(aiida_code, aiida_localhost):
+def tleap_code(aiida_code, aiida_localhost):
     """Get tleap code."""
     return aiida_code(
         "core.code.installed",
@@ -32,7 +32,7 @@ def gromacs_code(aiida_code, aiida_localhost):
 
 
 @pytest.fixture(scope="function")
-def gromacs_code(aiida_code, aiida_localhost):
+def antechamber_code(aiida_code, aiida_localhost):
     """Get antechamber code."""
     return aiida_code(
         "core.code.installed",
@@ -43,7 +43,7 @@ def gromacs_code(aiida_code, aiida_localhost):
 
 
 @pytest.fixture(scope="function")
-def gromacs_code(aiida_code, aiida_localhost):
+def pdb4amber_code(aiida_code, aiida_localhost):
     """Get pdb4amber code."""
     return aiida_code(
         "core.code.installed",
@@ -54,7 +54,7 @@ def gromacs_code(aiida_code, aiida_localhost):
 
 
 @pytest.fixture(scope="function")
-def gromacs_code(aiida_code, aiida_localhost):
+def parmed_code(aiida_code, aiida_localhost):
     """Get parmed code."""
     return aiida_code(
         "core.code.installed",
@@ -65,7 +65,7 @@ def gromacs_code(aiida_code, aiida_localhost):
 
 
 @pytest.fixture(scope="function")
-def gromacs_code(aiida_code, aiida_localhost):
+def bash_code(aiida_code, aiida_localhost):
     """Get bash code."""
     return aiida_code(
         "core.code.installed",
