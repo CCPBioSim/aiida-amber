@@ -105,6 +105,8 @@ disable = [
 # Configuration for [pytest](https://docs.pytest.org)
 python_files = "test_*.py example_*.py"
 filterwarnings = [
+    "ignore:Creating AiiDA configuration folder:",
+    'ignore:Object of type .* not in session, .* operation along .* will not proceed:sqlalchemy.exc.SAWarning',
     "ignore::DeprecationWarning:aiida:",
     "ignore::DeprecationWarning:plumpy:",
     "ignore::DeprecationWarning:yaml:",
