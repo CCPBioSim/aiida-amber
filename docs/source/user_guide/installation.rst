@@ -23,8 +23,7 @@ Our AiiDA plugin has been tested with AiiDA ``v2.4.0``, we recommend to `install
 
 .. code-block:: bash
 
-    conda install -c conda-forge mamba
-    mamba create --name aiida-2.4.0 -c conda-forge aiida-core=2.4.0 aiida-core.services=2.4.0
+    conda create --name aiida-2.9.1 -c conda-forge aiida-core=2.9.1
 
 Plugin Installation
 +++++++++++++++++++
@@ -33,7 +32,7 @@ To install the AiiDA-amber plugin, activate the conda environment created previo
 
 .. code-block:: bash
 
-    conda activate aiida-2.4.0
+    conda activate aiida-2.9.1
     pip install aiida-amber
 
 Alternative Installation via Conda
@@ -45,11 +44,5 @@ To install using Conda:
 
 .. code-block:: bash
 
-    conda activate aiida-2.4.0
+    conda activate aiida-2.9.1
     conda install -c CCPBioSim aiida-amber
-
-Or using mamba:
-
-.. code-block:: bash
-
-    mamba install -c CCPBioSim aiida-amber
