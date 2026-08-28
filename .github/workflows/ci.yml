@@ -34,18 +34,20 @@ jobs:
     - name: Add mamba packages
       run: |
         micromamba create -n testing -c conda-forge python=${{ matrix.python }} aiida-core=${{ matrix.aiida }} ambertools=${{ matrix.ambertools }}=cuda_None_nompi_*
-
-    - name: Add aiida-amber from repo for testing
-      run: |
-        eval "$(micromamba shell hook --shell bash)"
-        micromamba activate testing
         pip install -e .[testing]
-
-    - name: Run test suite
-      run: |
-        eval "$(micromamba shell hook --shell bash)"
-        micromamba activate testing
         pytest -s --cov aiida_gromacs --cov-report term-missing --cov-append .
+
+    #- name: Add aiida-amber from repo for testing
+    #  run: |
+    #    eval "$(micromamba shell hook --shell bash)"
+    #    micromamba activate testing
+    #    pip install -e .[testing]
+
+    #- name: Run test suite
+    #  run: |
+    #    eval "$(micromamba shell hook --shell bash)"
+    #    micromamba activate testing
+    #    pytest -s --cov aiida_gromacs --cov-report term-missing --cov-append .
 
     - name: Report Coverage
       uses: coverallsapp/github-action@5cbfd81b66ca5d10c19b062c04de0199c215fb6e # v2.3.7
