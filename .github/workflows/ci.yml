@@ -16,7 +16,7 @@ jobs:
       matrix:
         python: [3.13]
         aiida: [2.9.0, 2.9.1]
-        ambertools: [26]
+        ambertools: [24]
     continue-on-error: false
     runs-on: ubuntu-24.04
     timeout-minutes: 30
