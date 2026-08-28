@@ -1,7 +1,7 @@
 """pytest fixtures for simplified testing."""
 import pytest
 
-pytest_plugins = ["aiida.manage.tests.pytest_fixtures"]
+pytest_plugins = "aiida.tools.pytest_fixtures"
 
 
 @pytest.fixture(scope="function", autouse=True)
@@ -10,36 +10,66 @@ def clear_database_auto(clear_database):  # pylint: disable=unused-argument
 
 
 @pytest.fixture(scope="function")
-def amber_code(aiida_local_code_factory):
+def gromacs_code(aiida_code, aiida_localhost):
     """Get sander code."""
-    return aiida_local_code_factory(executable="sander", entry_point="amber")
+    return aiida_code(
+        "core.code.installed",
+        label="amber",
+        computer=aiida_localhost,
+        filepath_executable="sander",
+    )
 
 
 @pytest.fixture(scope="function")
-def tleap_code(aiida_local_code_factory):
+def gromacs_code(aiida_code, aiida_localhost):
     """Get tleap code."""
-    return aiida_local_code_factory(executable="tleap", entry_point="amber")
+    return aiida_code(
+        "core.code.installed",
+        label="amber",
+        computer=aiida_localhost,
+        filepath_executable="tleap",
+    )
 
 
 @pytest.fixture(scope="function")
-def antechamber_code(aiida_local_code_factory):
+def gromacs_code(aiida_code, aiida_localhost):
     """Get antechamber code."""
-    return aiida_local_code_factory(executable="antechamber", entry_point="amber")
+    return aiida_code(
+        "core.code.installed",
+        label="amber",
+        computer=aiida_localhost,
+        filepath_executable="antechamber",
+    )
 
 
 @pytest.fixture(scope="function")
-def pdb4amber_code(aiida_local_code_factory):
+def gromacs_code(aiida_code, aiida_localhost):
     """Get pdb4amber code."""
-    return aiida_local_code_factory(executable="pdb4amber", entry_point="amber")
+    return aiida_code(
+        "core.code.installed",
+        label="amber",
+        computer=aiida_localhost,
+        filepath_executable="pdb4amber",
+    )
 
 
 @pytest.fixture(scope="function")
-def parmed_code(aiida_local_code_factory):
+def gromacs_code(aiida_code, aiida_localhost):
     """Get parmed code."""
-    return aiida_local_code_factory(executable="parmed", entry_point="amber")
+    return aiida_code(
+        "core.code.installed",
+        label="amber",
+        computer=aiida_localhost,
+        filepath_executable="parmed",
+    )
 
 
 @pytest.fixture(scope="function")
-def bash_code(aiida_local_code_factory):
+def gromacs_code(aiida_code, aiida_localhost):
     """Get bash code."""
-    return aiida_local_code_factory(executable="bash", entry_point="amber")
+    return aiida_code(
+        "core.code.installed",
+        label="amber",
+        computer=aiida_localhost,
+        filepath_executable="bash",
+    )
