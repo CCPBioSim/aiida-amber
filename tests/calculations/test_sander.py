@@ -52,11 +52,11 @@ def run_sander(amber_code):
     return result
 
 
-def test_process(amber_code):
+def test_process(sander_code):
     """Test running a sander calculation.
     Note: this does not test that the expected outputs are created of output parsing"""
 
-    result = run_sander(amber_code)
+    result = run_sander(sander_code)
 
     assert "stdout" in result
     assert "mdinfo" in result
@@ -64,10 +64,10 @@ def test_process(amber_code):
     assert "restrt" in result
 
 
-def test_file_name_match(amber_code):
+def test_file_name_match(sander_code):
     """Test that the file names returned match what was specified on inputs."""
 
-    result = run_sander(amber_code)
+    result = run_sander(sander_code)
 
     assert result["stdout"].list_object_names()[0] == "sander.out"
     assert result["mdinfo"].list_object_names()[0] == "01_Min.mdinfo"
