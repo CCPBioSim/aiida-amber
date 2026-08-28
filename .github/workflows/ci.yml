@@ -20,7 +20,7 @@ jobs:
     continue-on-error: false
     runs-on: ubuntu-24.04
     timeout-minutes: 30
-    container:        
+    container:
       image: ghcr.io/mamba-org/micromamba:2.9.0-ubuntu24.04
       options: --user=root # required for checkout to mount
     name: py${{ matrix.python }}-aiida${{ matrix.aiida }}
@@ -28,7 +28,7 @@ jobs:
     - name: checkout
       uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
 
-    - name: Add mamba packages
+    - name: Install and test
       shell: _entrypoint.sh /bin/bash --noprofile --norc -eo pipefail {0}
       run: |
         micromamba install -c conda-forge python=${{ matrix.python }} aiida-core=${{ matrix.aiida }} ambertools=${{ matrix.ambertools }}=cuda_None_nompi_*
