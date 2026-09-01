@@ -70,10 +70,10 @@ def test_file_name_match(pdb4amber_code):
 
     result = run_pdb4amber(pdb4amber_code)
 
-    assert result["stdout"].list_object_names()[0] == "pdb4amber.out"
-    assert result["test_pdb"].list_object_names()[0] == "test.pdb"
-    assert result["test_sslink"].list_object_names()[0] == "test_sslink"
-    assert result["test_nonprot_pdb"].list_object_names()[0] == "test_nonprot.pdb"
-    assert result["test_renum_txt"].list_object_names()[0] == "test_renum.txt"
-    assert result["test_water_pdb"].list_object_names()[0] == "test_water.pdb"
-    assert result["leap_template_in"].list_object_names()[0] == "leap.template.in"
+    assert result["stdout"].base.repository.list_object_names()[0] == "pdb4amber.out"
+    assert result["test_pdb"].base.repository.list_object_names()[0] == "test.pdb"
+    assert result["test_sslink"].base.repository.list_object_names()[0] == "test_sslink"
+    assert result["test_nonprot_pdb"].base.repository.list_object_names()[0] == "test_nonprot.pdb"
+    assert result["test_renum_txt"].base.repository.list_object_names()[0] == "test_renum.txt"
+    assert result["test_water_pdb"].base.repository.list_object_names()[0] == "test_water.pdb"
+    assert result["leap_template_in"].base.repository.list_object_names()[0] == "leap.template.in"

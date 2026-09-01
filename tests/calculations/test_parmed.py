@@ -74,12 +74,16 @@ def test_file_name_match(parmed_code):
 
     result = run_parmed(parmed_code)
 
-    assert result["stdout"].list_object_names()[0] == "parmed.out"
+    assert result["stdout"].base.repository.list_object_names()[0] == "parmed.out"
     assert (
-        result["output_files_1D23_1264_na_tip4pew_prmtop"].list_object_names()[0]
+        result[
+            "output_files_1D23_1264_na_tip4pew_prmtop"
+        ].base.repository.list_object_names()[0]
         == "1D23_1264_na_tip4pew.prmtop"
     )
     assert (
-        result["output_files_1D23_1264_na_tip4pew_inpcrd"].list_object_names()[0]
+        result[
+            "output_files_1D23_1264_na_tip4pew_inpcrd"
+        ].base.repository.list_object_names()[0]
         == "1D23_1264_na_tip4pew.inpcrd"
     )

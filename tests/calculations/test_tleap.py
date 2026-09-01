@@ -55,6 +55,12 @@ def test_file_name_match(tleap_code):
 
     result = run_tleap(tleap_code)
 
-    assert result["stdout"].list_object_names()[0] == "tleap.out"
-    assert result["complex_prmtop"].list_object_names()[0] == "complex.prmtop"
-    assert result["complex_inpcrd"].list_object_names()[0] == "complex.inpcrd"
+    assert result["stdout"].base.repository.list_object_names()[0] == "tleap.out"
+    assert (
+        result["complex_prmtop"].base.repository.list_object_names()[0]
+        == "complex.prmtop"
+    )
+    assert (
+        result["complex_inpcrd"].base.repository.list_object_names()[0]
+        == "complex.inpcrd"
+    )
