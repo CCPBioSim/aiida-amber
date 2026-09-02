@@ -59,7 +59,6 @@ class SanderParser(Parser):
             "suffix": "suffix",
         }
 
-        # pylint: disable=unused-variable
         for item, val in output_template.items():
             if item in self.node.inputs.parameters.keys():
                 outputs.append(val)

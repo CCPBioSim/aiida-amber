@@ -42,7 +42,7 @@ cmdline_options = {
 }
 
 
-class Pdb4amberParameters(Dict):  # pylint: disable=too-many-ancestors
+class Pdb4amberParameters(Dict):
     """
     Command line options for pdb4amber.
 
@@ -52,8 +52,7 @@ class Pdb4amberParameters(Dict):  # pylint: disable=too-many-ancestors
 
     # "voluptuous" schema  to add automatic validation
     schema = Schema(cmdline_options)
-
-    # pylint: disable=redefined-builtin
+    
     def __init__(self, dict=None, **kwargs):
         """
         Constructor for the data class

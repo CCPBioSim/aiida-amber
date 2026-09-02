@@ -16,7 +16,7 @@ cmdline_options = {
 }
 
 
-class TleapParameters(Dict):  # pylint: disable=too-many-ancestors
+class TleapParameters(Dict):
     """
     Command line options for tleap.
 
@@ -27,7 +27,6 @@ class TleapParameters(Dict):  # pylint: disable=too-many-ancestors
     # "voluptuous" schema  to add automatic validation
     schema = Schema(cmdline_options)
 
-    # pylint: disable=redefined-builtin
     def __init__(self, dict=None, **kwargs):
         """
         Constructor for the data class

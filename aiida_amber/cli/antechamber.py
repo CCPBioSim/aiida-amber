@@ -66,11 +66,10 @@ def launch(params):
 
     # check if a pytest test is running, if so run rather than submit aiida job
     # Note: in order to submit your calculation to the aiida daemon, do:
-    # pylint: disable=unused-variable
     if "PYTEST_CURRENT_TEST" in os.environ:
-        future = engine.run(CalculationFactory("amber.antechamber"), **inputs)
+        engine.run(CalculationFactory("amber.antechamber"), **inputs)
     else:
-        future = engine.submit(CalculationFactory("amber.antechamber"), **inputs)
+        engine.submit(CalculationFactory("amber.antechamber"), **inputs)
 
 
 @click.command()
@@ -278,18 +277,18 @@ def launch(params):
     help="acdoctor mode: yes(y)[default] or no(n)",
 )
 def cli(*args, **kwargs):
-    # pylint: disable=unused-argument
-    # pylint: disable=line-too-long
     """Run example.
 
     Example usage:
 
-    $ aiida_antechamber --code antechamber@localhost -i input.mol2 -o output.mol2 -fi mol2 -fo mol2 -c bcc -pf yes -nc -2 -at gaff2 -j 5
+    $ aiida_antechamber --code antechamber@localhost -i input.mol2 -o output.mol2 \\
+        -fi mol2 -fo mol2 -c bcc -pf yes -nc -2 -at gaff2 -j 5
 
     Alternative (automatically tried to create amber@localhost code, but requires
     amber to be installed and available in your environment path):
 
-    $ aiida_antechamber -i input.mol2 -o output.mol2 -fi mol2 -fo mol2 -c bcc -pf yes -nc -2 -at gaff2 -j 5
+    $ aiida_antechamber -i input.mol2 -o output.mol2 \\
+        -fi mol2 -fo mol2 -c bcc -pf yes -nc -2 -at gaff2 -j 5
 
     Help: $ aiida_antechamber --help
     """
@@ -298,4 +297,4 @@ def cli(*args, **kwargs):
 
 
 if __name__ == "__main__":
-    cli()  # pylint: disable=no-value-for-parameter
+    cli()

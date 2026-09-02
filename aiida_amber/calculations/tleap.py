@@ -82,7 +82,6 @@ class TleapCalculation(CalcJob):
             temporarily place all files needed by the calculation.
         :return: `aiida.common.datastructures.CalcInfo` instance
         """
-        # pylint: disable=too-many-branches
         codeinfo = datastructures.CodeInfo()
 
         # Setup data structures for files.

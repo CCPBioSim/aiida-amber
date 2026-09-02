@@ -69,11 +69,10 @@ def launch(params):
 
     # check if a pytest test is running, if so run rather than submit aiida job
     # Note: in order to submit your calculation to the aiida daemon, do:
-    # pylint: disable=unused-variable
     if "PYTEST_CURRENT_TEST" in os.environ:
-        future = engine.run(CalculationFactory("amber.tleap"), **inputs)
+        engine.run(CalculationFactory("amber.tleap"), **inputs)
     else:
-        future = engine.submit(CalculationFactory("amber.tleap"), **inputs)
+        engine.submit(CalculationFactory("amber.tleap"), **inputs)
 
 
 @click.command()
@@ -95,8 +94,6 @@ def launch(params):
     help="dir containing leaprc files",
 )
 def cli(*args, **kwargs):
-    # pylint: disable=unused-argument
-    # pylint: disable=line-too-long
     """Run example.
 
     Example usage:
@@ -115,4 +112,4 @@ def cli(*args, **kwargs):
 
 
 if __name__ == "__main__":
-    cli()  # pylint: disable=no-value-for-parameter
+    cli()

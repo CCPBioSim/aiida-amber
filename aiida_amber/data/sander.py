@@ -45,7 +45,7 @@ cmdline_options = {
 }
 
 
-class SanderParameters(Dict):  # pylint: disable=too-many-ancestors
+class SanderParameters(Dict):
     """
     Command line options for sander.
 
@@ -56,7 +56,6 @@ class SanderParameters(Dict):  # pylint: disable=too-many-ancestors
     # "voluptuous" schema  to add automatic validation
     schema = Schema(cmdline_options)
 
-    # pylint: disable=redefined-builtin
     def __init__(self, dict=None, **kwargs):
         """
         Constructor for the data class
