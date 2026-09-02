@@ -121,15 +121,10 @@ def append_prev_nodes(qb, inputs, process_inputs, INPUT_DIR):
         for inp in inputs:  # strip input file names of any paths.
             stripped_inputs.append(strip_path(inp))
         for prev_file_node in file_nodes:
-            prev_output_filename = prev_file_node.base.attributes.get(
-                "filename"
-            )  # get filename of the node
+            prev_output_filename = prev_file_node.base.attributes.get("filename")  # get filename of the node
             # check if output file is an input for new process and
             # hasn't already been included as an input.
-            if (
-                prev_output_filename in stripped_inputs
-                and prev_output_filename not in prev_files
-            ):
+            if prev_output_filename in stripped_inputs and prev_output_filename not in prev_files:
                 prev_files.append(prev_output_filename)
                 prev[format_link_label(prev_output_filename)] = prev_file_node
 
@@ -137,9 +132,7 @@ def append_prev_nodes(qb, inputs, process_inputs, INPUT_DIR):
         for filename in list(inputs):
             stripped_input = strip_path(filename)
             if stripped_input not in prev_files:
-                prev[format_link_label(stripped_input)] = orm.SinglefileData(
-                    file=os.path.join(INPUT_DIR, filename)
-                )
+                prev[format_link_label(stripped_input)] = orm.SinglefileData(file=os.path.join(INPUT_DIR, filename))
 
         # update the calculation inputs dict with new dictionary of
         # input files including nodes from previous processes.
@@ -163,15 +156,10 @@ def link_previous_file_nodes(input_file_labels: dict, inputs: dict):
     prev_files = []  # list of previous files already saved.
     if file_nodes:
         for prev_file_node in file_nodes:
-            prev_output_filename = prev_file_node.base.attributes.get(
-                "filename"
-            )  # get filename of the node
+            prev_output_filename = prev_file_node.base.attributes.get("filename")  # get filename of the node
             # save previous file nodes if the filenames match with current process
             # input files
-            if (
-                prev_output_filename in input_file_labels.keys()
-                and prev_output_filename not in prev_files
-            ):
+            if prev_output_filename in input_file_labels.keys() and prev_output_filename not in prev_files:
                 prev_files.append(prev_output_filename)
                 label = input_file_labels[prev_output_filename]
                 inputs[label] = prev_file_node

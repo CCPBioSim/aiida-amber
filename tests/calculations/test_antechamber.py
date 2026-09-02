@@ -1,4 +1,5 @@
-""" Tests for antechamber calculations."""
+"""Tests for antechamber calculations."""
+
 import os
 
 from aiida.engine import run
@@ -27,9 +28,7 @@ def run_antechamber(antechamber_code):
     )
 
     SinglefileData = DataFactory("core.singlefile")
-    inp = SinglefileData(
-        file=os.path.join(TEST_DIR, "input_files/antechamber", "LigA.mol2")
-    )
+    inp = SinglefileData(file=os.path.join(TEST_DIR, "input_files/antechamber", "LigA.mol2"))
 
     # set up calculation
     inputs = {
@@ -62,6 +61,4 @@ def test_file_name_match(antechamber_code):
     result = run_antechamber(antechamber_code)
 
     assert result["stdout"].base.repository.list_object_names()[0] == "antechamber.out"
-    assert (
-        result["output_file"].base.repository.list_object_names()[0] == "LigandA.mol2"
-    )
+    assert result["output_file"].base.repository.list_object_names()[0] == "LigandA.mol2"

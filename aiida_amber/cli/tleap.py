@@ -7,7 +7,6 @@ Usage: aiida_tleap --help
 import os
 
 import click
-
 from aiida import cmdline, engine
 from aiida.orm import SinglefileData
 from aiida.plugins import CalculationFactory, DataFactory
@@ -47,9 +46,7 @@ def launch(params):
 
     # Prepare input parameters in AiiDA formats.
     # Set the tleap script as a TleapInputData type node
-    inputs["tleapscript"] = TleapInputData(
-        file=os.path.join(os.getcwd(), params.pop("f"))
-    )
+    inputs["tleapscript"] = TleapInputData(file=os.path.join(os.getcwd(), params.pop("f")))
 
     # Find the inputs and outputs referenced in the tleap script
     calc_inputs, calc_outputs = inputs["tleapscript"].calculation_inputs_outputs
@@ -60,9 +57,7 @@ def launch(params):
 
     if "i" in params:
         for i, subdir in enumerate(params["i"]):
-            inputs["dirs"][f"dir{i}"] = SinglefileData(
-                file=os.path.join(os.getcwd(), subdir)
-            )
+            inputs["dirs"][f"dir{i}"] = SinglefileData(file=os.path.join(os.getcwd(), subdir))
         params.pop("i")
 
     TleapParameters = DataFactory("amber.tleap")
@@ -74,11 +69,10 @@ def launch(params):
 
     # check if a pytest test is running, if so run rather than submit aiida job
     # Note: in order to submit your calculation to the aiida daemon, do:
-    # pylint: disable=unused-variable
     if "PYTEST_CURRENT_TEST" in os.environ:
-        future = engine.run(CalculationFactory("amber.tleap"), **inputs)
+        engine.run(CalculationFactory("amber.tleap"), **inputs)
     else:
-        future = engine.submit(CalculationFactory("amber.tleap"), **inputs)
+        engine.submit(CalculationFactory("amber.tleap"), **inputs)
 
 
 @click.command()
@@ -92,9 +86,7 @@ def launch(params):
     help="Short metadata description",
 )
 # Input file options
-@click.option(
-    "-f", default="tleapscript", type=str, help="input script for tleap commands"
-)
+@click.option("-f", default="tleapscript", type=str, help="input script for tleap commands")
 @click.option(
     "-I",
     type=str,
@@ -102,8 +94,6 @@ def launch(params):
     help="dir containing leaprc files",
 )
 def cli(*args, **kwargs):
-    # pylint: disable=unused-argument
-    # pylint: disable=line-too-long
     """Run example.
 
     Example usage:
@@ -122,4 +112,4 @@ def cli(*args, **kwargs):
 
 
 if __name__ == "__main__":
-    cli()  # pylint: disable=no-value-for-parameter
+    cli()

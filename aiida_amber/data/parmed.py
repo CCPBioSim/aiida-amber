@@ -3,11 +3,11 @@ Data types provided by plugin
 
 Register data types via the "aiida.data" entry point in setup.json.
 """
+
 # You can directly use or subclass aiida.orm.data.Data
 # or any other data type listed under 'verdi data'
-from voluptuous import Optional, Required, Schema
-
 from aiida.orm import Dict
+from voluptuous import Optional, Required, Schema
 
 # A subset of parmed command line options
 cmdline_options = {
@@ -29,7 +29,7 @@ cmdline_options = {
 }
 
 
-class ParmedParameters(Dict):  # pylint: disable=too-many-ancestors
+class ParmedParameters(Dict):
     """
     Command line options for parmed.
 
@@ -40,7 +40,6 @@ class ParmedParameters(Dict):  # pylint: disable=too-many-ancestors
     # "voluptuous" schema  to add automatic validation
     schema = Schema(cmdline_options)
 
-    # pylint: disable=redefined-builtin
     def __init__(self, dict=None, **kwargs):
         """
         Constructor for the data class

@@ -1,4 +1,5 @@
-""" Tests for tleap calculations."""
+"""Tests for tleap calculations."""
+
 import os
 
 from aiida.engine import run
@@ -25,9 +26,7 @@ def run_tleap(tleap_code):
 
     # Prepare input parameters in AiiDA formats.
     # Set the tleap script as a TleapInputData type node
-    inputs["tleapscript"] = TleapInputData(
-        file=os.path.join(os.getcwd(), "tests/input_files/tleap", "tleap.in")
-    )
+    inputs["tleapscript"] = TleapInputData(file=os.path.join(os.getcwd(), "tests/input_files/tleap", "tleap.in"))
 
     # Find the inputs and outputs referenced in the tleap script
     calc_inputs, calc_outputs = inputs["tleapscript"].calculation_inputs_outputs
@@ -56,11 +55,5 @@ def test_file_name_match(tleap_code):
     result = run_tleap(tleap_code)
 
     assert result["stdout"].base.repository.list_object_names()[0] == "tleap.out"
-    assert (
-        result["complex_prmtop"].base.repository.list_object_names()[0]
-        == "complex.prmtop"
-    )
-    assert (
-        result["complex_inpcrd"].base.repository.list_object_names()[0]
-        == "complex.inpcrd"
-    )
+    assert result["complex_prmtop"].base.repository.list_object_names()[0] == "complex.prmtop"
+    assert result["complex_inpcrd"].base.repository.list_object_names()[0] == "complex.inpcrd"

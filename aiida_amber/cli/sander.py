@@ -7,7 +7,6 @@ Usage: aiida_sander --help
 import os
 
 import click
-
 from aiida import cmdline, engine
 from aiida.plugins import CalculationFactory, DataFactory
 
@@ -48,33 +47,19 @@ def launch(params):
     inputs["inpcrd"] = SinglefileData(file=os.path.join(os.getcwd(), params.pop("c")))
 
     if "ref" in params:
-        inputs["refc"] = SinglefileData(
-            file=os.path.join(os.getcwd(), params.pop("ref"))
-        )
+        inputs["refc"] = SinglefileData(file=os.path.join(os.getcwd(), params.pop("ref")))
     if "mtmd" in params:
-        inputs["mtmd"] = SinglefileData(
-            file=os.path.join(os.getcwd(), params.pop("mtmd"))
-        )
+        inputs["mtmd"] = SinglefileData(file=os.path.join(os.getcwd(), params.pop("mtmd")))
     if "y" in params:
-        inputs["inptraj"] = SinglefileData(
-            file=os.path.join(os.getcwd(), params.pop("y"))
-        )
+        inputs["inptraj"] = SinglefileData(file=os.path.join(os.getcwd(), params.pop("y")))
     if "idip" in params:
-        inputs["inpdip"] = SinglefileData(
-            file=os.path.join(os.getcwd(), params.pop("idip"))
-        )
+        inputs["inpdip"] = SinglefileData(file=os.path.join(os.getcwd(), params.pop("idip")))
     if "cpin" in params:
-        inputs["cpin"] = SinglefileData(
-            file=os.path.join(os.getcwd(), params.pop("cpin"))
-        )
+        inputs["cpin"] = SinglefileData(file=os.path.join(os.getcwd(), params.pop("cpin")))
     if "cein" in params:
-        inputs["cein"] = SinglefileData(
-            file=os.path.join(os.getcwd(), params.pop("cein"))
-        )
+        inputs["cein"] = SinglefileData(file=os.path.join(os.getcwd(), params.pop("cein")))
     if "evbin" in params:
-        inputs["evbin"] = SinglefileData(
-            file=os.path.join(os.getcwd(), params.pop("evbin"))
-        )
+        inputs["evbin"] = SinglefileData(file=os.path.join(os.getcwd(), params.pop("evbin")))
 
     SanderParameters = DataFactory("amber.sander")
     inputs["parameters"] = SanderParameters(params)
@@ -84,11 +69,10 @@ def launch(params):
 
     # check if a pytest test is running, if so run rather than submit aiida job
     # Note: in order to submit your calculation to the aiida daemon, do:
-    # pylint: disable=unused-variable
     if "PYTEST_CURRENT_TEST" in os.environ:
-        future = engine.run(CalculationFactory("amber.sander"), **inputs)
+        engine.run(CalculationFactory("amber.sander"), **inputs)
     else:
-        future = engine.submit(CalculationFactory("amber.sander"), **inputs)
+        engine.submit(CalculationFactory("amber.sander"), **inputs)
 
 
 @click.command()
@@ -102,39 +86,33 @@ def launch(params):
     help="Short metadata description",
 )
 # Input file options
-@click.option(
-    "-i", default="mdin", type=str, help="input control data for the min/md run"
-)
+@click.option("-i", default="mdin", type=str, help="input control data for the min/md run")
 @click.option(
     "-p",
     default="prmtop",
     type=str,
-    help="input molecular topology, force field, periodic box type, atom and "
-    "residue names",
+    help="input molecular topology, force field, periodic box type, atom and residue names",
 )
 @click.option(
     "-c",
     default="inpcrd",
     type=str,
-    help="input initial coordinates and (optionally) velocities and periodic "
-    "box size",
+    help="input initial coordinates and (optionally) velocities and periodic box size",
 )
 @click.option(
     "-ref",
     type=str,
-    help="input (optional) reference coords for position restraints; also used "
-    "for targeted MD",
+    help="input (optional) reference coords for position restraints; also used for targeted MD",
 )
 @click.option(
     "-mtmd",
     type=str,
-    help="input (optional) containing list of files and parameters for "
-    "targeted MD to multiple targets",
+    help="input (optional) containing list of files and parameters for targeted MD to multiple targets",
 )
 @click.option(
     "-y",
     type=str,
-    help="input coordinate sets in trajectory format, " "when imin=5 or 6",
+    help="input coordinate sets in trajectory format, when imin=5 or 6",
 )
 @click.option("-idip", type=str, help="input polarizable dipole file, when indmeth=3")
 @click.option("-cpin", type=str, help="input protonation state definitions")
@@ -148,9 +126,7 @@ def launch(params):
     help="output user readable state info and diagnostics -o stdout will send "
     "output to stdout (to the terminal) instead of to a file",
 )
-@click.option(
-    "-inf", default="mdinfo", type=str, help="output latest mdout-format energy info"
-)
+@click.option("-inf", default="mdinfo", type=str, help="output latest mdout-format energy info")
 @click.option("-x", type=str, help="output coordinate sets saved over trajectory")
 @click.option("-v", type=str, help="output velocity sets saved over trajectory")
 @click.option("-frc", type=str, help="output force sets saved over trajectory")
@@ -165,9 +141,7 @@ def launch(params):
     help="output final coordinates, velocity, and box dimensions if any - for restarting run",
 )
 @click.option("-rdip", type=str, help="output polarizable dipole file, when indmeth=3")
-@click.option(
-    "-cpout", type=str, help="output protonation state data saved over trajectory"
-)
+@click.option("-cpout", type=str, help="output protonation state data saved over trajectory")
 @click.option(
     "-cprestrt",
     type=str,
@@ -188,22 +162,20 @@ def launch(params):
 )
 # Other parameters
 @click.option("-O", help="Overwrite output files if they exist")
-@click.option(
-    "-A", help="Append output files if they exist (used mainly for replica exchange)"
-)
+@click.option("-A", help="Append output files if they exist (used mainly for replica exchange)")
 def cli(*args, **kwargs):
-    # pylint: disable=unused-argument
-    # pylint: disable=line-too-long
     """Run example.
 
     Example usage:
 
-    $ aiida_sander --code amber@localhost -i input_files/01_Min.in -o 01_Min.out -p parm7 -c rst7 -r 01_Min.ncrst -inf 01_Min.mdinfo
+    $ aiida_sander --code amber@localhost -i input_files/01_Min.in -o 01_Min.out \
+        -p parm7 -c rst7 -r 01_Min.ncrst -inf 01_Min.mdinfo
 
     Alternative (automatically tried to create amber@localhost code, but requires
     amber to be installed and available in your environment path):
 
-    $ aiida_sander -i input_files/01_Min.in -o 01_Min.out -p parm7 -c rst7 -r 01_Min.ncrst -inf 01_Min.mdinfo
+    $ aiida_sander -i input_files/01_Min.in -o 01_Min.out \
+        -p parm7 -c rst7 -r 01_Min.ncrst -inf 01_Min.mdinfo
 
     Help: $ aiida_sander --help
     """
@@ -212,4 +184,4 @@ def cli(*args, **kwargs):
 
 
 if __name__ == "__main__":
-    cli()  # pylint: disable=no-value-for-parameter
+    cli()

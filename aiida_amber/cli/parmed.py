@@ -7,7 +7,6 @@ Usage: aiida_parmed --help
 import os
 
 import click
-
 from aiida import cmdline, engine
 from aiida.orm import SinglefileData
 from aiida.plugins import CalculationFactory, DataFactory
@@ -44,9 +43,7 @@ def launch(params):
 
     # Prepare input parameters in AiiDA formats.
     # Set the tleap script as a TleapInputData type node
-    inputs["parmed_script"] = ParmedInputData(
-        file=os.path.join(os.getcwd(), params.pop("input"))
-    )
+    inputs["parmed_script"] = ParmedInputData(file=os.path.join(os.getcwd(), params.pop("input")))
 
     # Find the inputs and outputs referenced in the tleap script
     calc_inputs, calc_outputs = inputs["parmed_script"].calculation_inputs_outputs
@@ -61,9 +58,7 @@ def launch(params):
         for parmfile in parm_list:
             formatted_filename = node_utils.format_link_label(parmfile)
             # inputs["prmtop_files"] = List(parm_list)
-            inputs["prmtop_files"][formatted_filename] = SinglefileData(
-                file=os.path.join(os.getcwd(), parmfile)
-            )
+            inputs["prmtop_files"][formatted_filename] = SinglefileData(file=os.path.join(os.getcwd(), parmfile))
     if "inpcrd" in params:
         inputs["inpcrd_files"] = {}
         inpcrd_list = list(params["inpcrd"].split())
@@ -71,9 +66,7 @@ def launch(params):
         # inputs["inpcrd_files"] = List(inpcrd_list)
         for inpcrdfile in inpcrd_list:
             formatted_filename = node_utils.format_link_label(inpcrdfile)
-            inputs["inpcrd_files"][formatted_filename] = SinglefileData(
-                file=os.path.join(os.getcwd(), inpcrdfile)
-            )
+            inputs["inpcrd_files"][formatted_filename] = SinglefileData(file=os.path.join(os.getcwd(), inpcrdfile))
 
     # correct the flags that should contain a dash "-"
     # rather than an underscore "_"
@@ -93,11 +86,10 @@ def launch(params):
 
     # check if a pytest test is running, if so run rather than submit aiida job
     # Note: in order to submit your calculation to the aiida daemon, do:
-    # pylint: disable=unused-variable
     if "PYTEST_CURRENT_TEST" in os.environ:
-        future = engine.run(CalculationFactory("amber.parmed"), **inputs)
+        engine.run(CalculationFactory("amber.parmed"), **inputs)
     else:
-        future = engine.submit(CalculationFactory("amber.parmed"), **inputs)
+        engine.submit(CalculationFactory("amber.parmed"), **inputs)
 
 
 @click.command()
@@ -110,7 +102,6 @@ def launch(params):
     type=str,
     help="Short metadata description",
 )
-
 # Required inputs
 @click.option(
     "-i",
@@ -152,11 +143,8 @@ def launch(params):
     help="""Log file with every command executed during an interactive
                 ParmEd session. Default is parmed.log""",
 )  # file out
-
 # other parameters
-@click.option(
-    "-O", "--overwrite", is_flag=True, help="Allow ParmEd to overwrite existing files."
-)
+@click.option("-O", "--overwrite", is_flag=True, help="Allow ParmEd to overwrite existing files.")
 @click.option(
     "--prompt",
     type=str,
@@ -197,8 +185,6 @@ def launch(params):
             interpreter emits a non-fatal warning.""",
 )
 def cli(*args, **kwargs):
-    # pylint: disable=unused-argument
-    # pylint: disable=line-too-long
     """Run example.
 
     Example usage:
@@ -217,4 +203,4 @@ def cli(*args, **kwargs):
 
 
 if __name__ == "__main__":
-    cli()  # pylint: disable=no-value-for-parameter
+    cli()

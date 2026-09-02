@@ -3,6 +3,7 @@ Parsers provided by aiida_amber.
 
 This calculation configures the ability to use the 'sander' executable.
 """
+
 import os
 from pathlib import Path
 
@@ -58,7 +59,6 @@ class SanderParser(Parser):
             "suffix": "suffix",
         }
 
-        # pylint: disable=unused-variable
         for item, val in output_template.items():
             if item in self.node.inputs.parameters.keys():
                 outputs.append(val)
@@ -75,9 +75,7 @@ class SanderParser(Parser):
 
         # Check if the expected files are a subset of retrieved.
         if not set(files_expected) <= set(files_retrieved):
-            self.logger.error(
-                f"Found files '{files_retrieved}', expected to find '{files_expected}'"
-            )
+            self.logger.error(f"Found files '{files_retrieved}', expected to find '{files_expected}'")
             return self.exit_codes.ERROR_MISSING_OUTPUT_FILES
 
         # Map retrieved files to data nodes.
