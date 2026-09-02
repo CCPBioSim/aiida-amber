@@ -1,4 +1,5 @@
-""" Tests for parmed calculations."""
+"""Tests for parmed calculations."""
+
 import os
 
 from aiida.engine import run
@@ -43,15 +44,11 @@ def run_parmed(parmed_code):
 
     inputs["prmtop_files"] = {}
     inputs["prmtop_files"]["1D23_tip4pew_prmtop"] = SinglefileData(
-        file=os.path.join(
-            os.getcwd(), "tests/input_files/parmed", "1D23_tip4pew.prmtop"
-        )
+        file=os.path.join(os.getcwd(), "tests/input_files/parmed", "1D23_tip4pew.prmtop")
     )
     inputs["inpcrd_files"] = {}
     inputs["inpcrd_files"]["1D23_tip4pew_inpcrd"] = SinglefileData(
-        file=os.path.join(
-            os.getcwd(), "tests/input_files/parmed", "1D23_tip4pew.inpcrd"
-        )
+        file=os.path.join(os.getcwd(), "tests/input_files/parmed", "1D23_tip4pew.inpcrd")
     )
 
     result = run(CalculationFactory("amber.parmed"), **inputs)
@@ -76,14 +73,10 @@ def test_file_name_match(parmed_code):
 
     assert result["stdout"].base.repository.list_object_names()[0] == "parmed.out"
     assert (
-        result[
-            "output_files_1D23_1264_na_tip4pew_prmtop"
-        ].base.repository.list_object_names()[0]
+        result["output_files_1D23_1264_na_tip4pew_prmtop"].base.repository.list_object_names()[0]
         == "1D23_1264_na_tip4pew.prmtop"
     )
     assert (
-        result[
-            "output_files_1D23_1264_na_tip4pew_inpcrd"
-        ].base.repository.list_object_names()[0]
+        result["output_files_1D23_1264_na_tip4pew_inpcrd"].base.repository.list_object_names()[0]
         == "1D23_1264_na_tip4pew.inpcrd"
     )

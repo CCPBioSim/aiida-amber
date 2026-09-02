@@ -7,7 +7,6 @@ Usage: aiida_tleap --help
 import os
 
 import click
-
 from aiida import cmdline, engine
 from aiida.orm import SinglefileData
 from aiida.plugins import CalculationFactory, DataFactory
@@ -47,9 +46,7 @@ def launch(params):
 
     # Prepare input parameters in AiiDA formats.
     # Set the tleap script as a TleapInputData type node
-    inputs["tleapscript"] = TleapInputData(
-        file=os.path.join(os.getcwd(), params.pop("f"))
-    )
+    inputs["tleapscript"] = TleapInputData(file=os.path.join(os.getcwd(), params.pop("f")))
 
     # Find the inputs and outputs referenced in the tleap script
     calc_inputs, calc_outputs = inputs["tleapscript"].calculation_inputs_outputs
@@ -60,9 +57,7 @@ def launch(params):
 
     if "i" in params:
         for i, subdir in enumerate(params["i"]):
-            inputs["dirs"][f"dir{i}"] = SinglefileData(
-                file=os.path.join(os.getcwd(), subdir)
-            )
+            inputs["dirs"][f"dir{i}"] = SinglefileData(file=os.path.join(os.getcwd(), subdir))
         params.pop("i")
 
     TleapParameters = DataFactory("amber.tleap")
@@ -92,9 +87,7 @@ def launch(params):
     help="Short metadata description",
 )
 # Input file options
-@click.option(
-    "-f", default="tleapscript", type=str, help="input script for tleap commands"
-)
+@click.option("-f", default="tleapscript", type=str, help="input script for tleap commands")
 @click.option(
     "-I",
     type=str,

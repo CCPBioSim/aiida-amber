@@ -1,6 +1,4 @@
-""" Test for tleap cli script
-
-"""
+"""Test for tleap cli script"""
 
 import os
 import subprocess

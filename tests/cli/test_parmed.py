@@ -1,4 +1,4 @@
-""" Test for parmed cli script"""
+"""Test for parmed cli script"""
 
 import os
 import subprocess

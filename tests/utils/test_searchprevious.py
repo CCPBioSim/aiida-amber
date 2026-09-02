@@ -1,6 +1,5 @@
-""" Test for searchprevious utility functions
+"""Test for searchprevious utility functions"""
 
-"""
 from aiida_amber.utils import searchprevious
 
 

@@ -3,6 +3,7 @@ Calculations provided by aiida_amber.
 
 Register calculations via the "aiida.calculations" entry point in setup.json.
 """
+
 import os
 
 from aiida.common import CalcInfo, datastructures
@@ -141,9 +142,7 @@ class ParmedCalculation(CalcJob):
                 output_files.append(str(name))  # save output filename to list
 
         # Form the commandline.
-        codeinfo.cmdline_params = self.inputs.parameters.cmdline_params(
-            cmdline_input_files
-        )
+        codeinfo.cmdline_params = self.inputs.parameters.cmdline_params(cmdline_input_files)
 
         codeinfo.code_uuid = self.inputs.code.uuid
         codeinfo.stdout_name = self.metadata.options.output_filename

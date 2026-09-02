@@ -1,6 +1,4 @@
-""" Test for sander cli script
-
-"""
+"""Test for sander cli script"""
 
 import os
 import subprocess

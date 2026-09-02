@@ -1,6 +1,4 @@
-""" Test for antechamber cli script
-
-"""
+"""Test for antechamber cli script"""
 
 import os
 import subprocess
