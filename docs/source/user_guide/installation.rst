@@ -45,4 +45,4 @@ To install using Conda:
 .. code-block:: bash
 
     conda activate aiida-2.9.1
-    conda install -c CCPBioSim aiida-amber
+    conda install -c ccpbiosim aiida-amber
