@@ -8,6 +8,7 @@ Note: Point 2 is made possible by the fact that the ``sander`` executable is
 available in the PATH on almost any UNIX system.
 """
 
+import os
 import shutil
 import tempfile
 
@@ -95,11 +96,14 @@ def get_code(entry_point, computer):
         return codes[0]
 
     path = get_path_to_executable(executable)
+    # AmberTools data files (e.g. dat/leap/parm/*) are looked up relative to AMBERHOME
+    amberhome = os.path.dirname(os.path.dirname(path))
     code = InstalledCode(
         label=executable,
         default_calc_job_plugin=entry_point,
         computer=computer,
         filepath_executable=path,
+        prepend_text=f"export AMBERHOME={amberhome}",
     )
 
     return code.store()
