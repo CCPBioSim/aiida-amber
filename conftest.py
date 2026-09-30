@@ -1,8 +1,9 @@
 """pytest fixtures for simplified testing."""
 
-import pytest
 import os
 import shutil
+
+import pytest
 
 pytest_plugins = "aiida.tools.pytest_fixtures"
 
