@@ -4,11 +4,10 @@ import os
 import subprocess
 
 from aiida.orm.nodes.process.process import ProcessState
-
-from aiida_amber.utils import searchprevious
-
 from click.testing import CliRunner
+
 from aiida_amber.cli.sander import cli
+from aiida_amber.utils import searchprevious
 
 from .. import TEST_DIR
 
@@ -55,8 +54,7 @@ def test_cli_launch_sander(sander_code):
     inpcrd = os.path.join(TEST_DIR, "input_files", "sander", "rst7")
     result = CliRunner().invoke(
         cli,
-        ["-i", mdin, "-p", prmtop, "-c", inpcrd, "-o", "01_Min.out",
-         "-r", "01_Min.ncrst", "-inf", "01_Min.mdinfo"],
+        ["-i", mdin, "-p", prmtop, "-c", inpcrd, "-o", "01_Min.out", "-r", "01_Min.ncrst", "-inf", "01_Min.mdinfo"],
         catch_exceptions=False,
     )
     assert result.exit_code == 0

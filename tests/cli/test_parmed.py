@@ -4,11 +4,10 @@ import os
 import subprocess
 
 from aiida.orm.nodes.process.process import ProcessState
-
-from aiida_amber.utils import searchprevious
-
 from click.testing import CliRunner
+
 from aiida_amber.cli.parmed import cli
+from aiida_amber.utils import searchprevious
 
 from .. import TEST_DIR
 
@@ -48,7 +47,5 @@ def test_cli_launch_parmed(parmed_code):
     parmed_in = os.path.join(TEST_DIR, "input_files", "parmed", "parmed_1264_na.in")
     prmtop = os.path.join(TEST_DIR, "input_files", "parmed", "1D23_tip4pew.prmtop")
     inpcrd = os.path.join(TEST_DIR, "input_files", "parmed", "1D23_tip4pew.inpcrd")
-    result = CliRunner().invoke(
-        cli, ["-i", parmed_in, "-p", prmtop, "-c", inpcrd], catch_exceptions=False
-    )
+    result = CliRunner().invoke(cli, ["-i", parmed_in, "-p", prmtop, "-c", inpcrd], catch_exceptions=False)
     assert result.exit_code == 0

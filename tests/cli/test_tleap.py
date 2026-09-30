@@ -4,11 +4,10 @@ import os
 import subprocess
 
 from aiida.orm.nodes.process.process import ProcessState
-
-from aiida_amber.utils import searchprevious
-
 from click.testing import CliRunner
+
 from aiida_amber.cli.tleap import cli
+from aiida_amber.utils import searchprevious
 
 from .. import TEST_DIR
 
