@@ -7,12 +7,16 @@ from aiida.orm.nodes.process.process import ProcessState
 
 from aiida_amber.utils import searchprevious
 
+from click.testing import CliRunner
+from aiida_amber.cli.parmed import cli
+
 from .. import TEST_DIR
 
 
 def test_launch_parmed():
     """
     Run an instance of parmed.
+    Verify the actual installed console-script entry point (aiida_parmed) works.
     """
     # get input file paths
     parmed_in = os.path.join(TEST_DIR, "input_files", "parmed", "parmed_1264_na.in")
@@ -37,3 +41,14 @@ def test_launch_parmed():
     # check the process has finished and exited correctly
     assert prev_calc.process_state == ProcessState.FINISHED
     assert prev_calc.exit_status == 0
+
+
+def test_cli_launch_parmed(parmed_code):
+    """Invoke the parmed cli in-process to cover cli/parmed.py."""
+    parmed_in = os.path.join(TEST_DIR, "input_files", "parmed", "parmed_1264_na.in")
+    prmtop = os.path.join(TEST_DIR, "input_files", "parmed", "1D23_tip4pew.prmtop")
+    inpcrd = os.path.join(TEST_DIR, "input_files", "parmed", "1D23_tip4pew.inpcrd")
+    result = CliRunner().invoke(
+        cli, ["-i", parmed_in, "-p", prmtop, "-c", inpcrd], catch_exceptions=False
+    )
+    assert result.exit_code == 0
