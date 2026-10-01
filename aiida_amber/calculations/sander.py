@@ -8,7 +8,7 @@ import os
 
 from aiida.common import CalcInfo, datastructures
 from aiida.engine import CalcJob
-from aiida.orm import SinglefileData
+from aiida.orm import Dict, SinglefileData
 from aiida.plugins import DataFactory
 
 SanderParameters = DataFactory("amber.sander")
@@ -109,6 +109,9 @@ class SanderCalculation(CalcJob):
                     "output files that are printed (for multisander runs, it "
                     "will append this suffix to all output files).")
 
+        # Outputs outside of amber
+        spec.output('simulation_metadata', valid_type=Dict, help='metadata extracted from gromacs logfile')
+
         spec.exit_code(300, "ERROR_MISSING_OUTPUT_FILES",
             message="Calculation did not produce all expected output files.")
 
@@ -149,6 +152,7 @@ class SanderCalculation(CalcJob):
             "cerestrt",
             "ceout",
             "suffix",
+            "simulation_metadata",
         ]
         cmdline_input_files = {}
         input_files = []
