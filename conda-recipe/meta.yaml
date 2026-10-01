@@ -21,14 +21,14 @@ outputs:
         - aiida_parmed=aiida_amber.cli.parmed:cli
     requirements:
       host:
-        - python
+        - python >=3.12
         - pip
         - flit-core >=4,<5
       run:
-        - python
+        - python >=3.12
         - aiida-core >=2.6.1,<=2.6.3
-        - voluptuous
-        - mdanalysis >=2.7,<3
+        - voluptuous >=0.16.0,<1.0
+        - biosim-extractor >=1.0.0,<2.0
     about:
       home: https://github.com/CCPBioSim/aiida-amber
       license: MIT
