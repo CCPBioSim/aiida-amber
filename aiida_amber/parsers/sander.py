@@ -4,14 +4,18 @@ Parsers provided by aiida_amber.
 This calculation configures the ability to use the 'sander' executable.
 """
 
+import json
 import os
+import tempfile
 from pathlib import Path
 
 from aiida.common import exceptions
 from aiida.engine import ExitCode
-from aiida.orm import SinglefileData
+from aiida.orm import Dict, SinglefileData
 from aiida.parsers.parser import Parser
 from aiida.plugins import CalculationFactory
+
+from aiida_amber.utils import fileparsers
 
 SanderCalculation = CalculationFactory("amber.sander")
 
@@ -84,9 +88,93 @@ class SanderParser(Parser):
             with self.retrieved.base.repository.open(f, "rb") as handle:
                 output_node = SinglefileData(filename=f, file=handle)
             self.out(outputs[i], output_node)
+            # Include file parsers here
+            if outputs[i] == "mdout":
+                with tempfile.TemporaryDirectory(prefix="sander_metadata_") as temp_dir:
+                    temp_dir = Path(temp_dir)
+
+                    topology_node = self.node.inputs.prmtop
+                    topology_path = self.copy_repository_file(
+                        topology_node.base.repository,
+                        topology_node.filename,
+                        temp_dir,
+                    )
+
+                    if "mdcrd" in outputs:
+                        trajectory_index = outputs.index("mdcrd")
+                    else:
+                        self.logger.warning("No mdcrd or restrt output is available; skipping metadata extraction.")
+                        continue
+
+                    trajectory_f = files_expected[trajectory_index]
+                    trajectory_path = self.copy_repository_file(
+                        self.retrieved,
+                        trajectory_f,
+                        temp_dir,
+                    )
+
+                    log_path = self.copy_repository_file(
+                        self.retrieved,
+                        f,
+                        temp_dir,
+                    )
+
+                    SanderParser.parse_file_contents(
+                        self,
+                        topology_path,
+                        trajectory_path,
+                        log_path,
+                        temp_dir,
+                        fileparsers.extract_amber_files,
+                        node_name="simulation_metadata",
+                    )
 
         # If not in testing mode, then copy back the files.
         if "PYTEST_CURRENT_TEST" not in os.environ:
             self.retrieved.copy_tree(output_dir)
 
         return ExitCode(0)
+
+    def copy_repository_file(self, repository, filename, output_dir):
+        """Copy a repository file to output_dir and return its local path."""
+        output_dir.mkdir(parents=True, exist_ok=True)
+        destination = output_dir / filename
+
+        with repository.open(filename, "rb") as source, destination.open("wb") as target:
+            target.write(source.read())
+
+        return destination
+
+    def parse_file_contents(self, top_file, traj_file, log_file, output_dir, parser_func, node_name):
+        """
+        Read in the gromacs output file, save into a dictionary node and
+        output dictionary as a json file.
+
+        :param top_file: temp path to topology file
+        :param traj_file: temp path to trajectory file
+        :param log_file: temp path to log file
+        :param output_dir: temp path to where json file should be saved
+        :param parser_func: the function used to parse the file f
+        :type parser_func: `class 'function'`
+        :param node_name: the name of the outputted Dict node
+        :type node_name: str
+        """
+        metadata_dict = parser_func(top_file, traj_file, log_file)
+        metadata_node = Dict(metadata_dict)
+        self.out(node_name, metadata_node)
+        SanderParser.output_parsed_metadata(log_file, output_dir, metadata_dict)
+
+    def output_parsed_metadata(f, output_dir, metadata_dict):
+        """
+        Save a dictionary into a json file if not in testing mode.
+
+        :param f: the name of the file node outputted from mdrun
+        :param output_dir: path to where json file should be saved
+        :param metadata_dict: the aiida dictionary containing metadata
+        """
+        # If not in testing mode, then copy back dict as json file.
+        if "PYTEST_CURRENT_TEST" not in os.environ:
+            f_prefix = f.stem
+            file_path = os.path.join(output_dir, f"{f_prefix}_metadata.json")
+            with open(file_path, "w", encoding="utf-8") as f:
+                json.dump(metadata_dict, f, ensure_ascii=False, indent=4)

@@ -24,8 +24,6 @@ def launch(params):
     # Prune unused CLI parameters from dict.
     params = {k: v for k, v in params.items() if v is not None}
 
-    print(params)
-
     # dict to hold our calculation data.
     inputs = {
         "metadata": {
