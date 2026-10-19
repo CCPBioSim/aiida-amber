@@ -24,6 +24,11 @@ conda environment, along with modifying your command lines very slightly.
 This means that you should gain access to powerful FAIR data practices without
 wholesale cultural or usage pattern shifts in your daily work.
 
+<p align="center">
+    <img src="docs/source/images/aiida-amber-logo.svg" alt="aiida-amber logo" width="300"/>
+</p>
+
+
 ## Documentation
 
 See [here](https://aiida-amber.readthedocs.io/en/latest/) for documentation for users and developers.
