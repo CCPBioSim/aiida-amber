@@ -62,7 +62,6 @@ jobs:
     with:
       python-versions: '["3.15"]'
       build-dir: build
-      sphinx-opts: ""
       timeout-minutes: 15
 
   pre-commit:
