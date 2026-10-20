@@ -1,0 +1,35 @@
+name: Coveralls Main
+
+on:
+  push:
+    branches: [main]
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: coveralls-main-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  coveralls:
+    name: Build main coverage baseline
+    uses: CCPBioSim/.github/.github/workflows/ci-test-conda.yaml@43d3ed06eb774dfa813173770888a15f554c70cc # 0.6.0
+    permissions:
+      contents: read
+      checks: write
+      statuses: write
+    with:
+      package: aiida_amber
+      matrix: >-
+        {
+          "python": ["3.12", "3.13", "3.14"],
+          "aiida": ["2.9.0", "2.9.1"],
+          "ambertools": ["24"]
+        }
+      conda-packages: python={python} aiida-core={aiida} ambertools={ambertools}
+      pytest-args: -s
+      test-path: .
+      timeout-minutes: 30
