@@ -1,5 +1,6 @@
 {% set name = "aiida-amber" %}
-{% set version = "2.1.0" %}
+{% set version = "0.0.0" %}
+{% set pyproject = load_file_data("../pyproject.toml", from_recipe_dir=True) %}
 
 package:
   name: {{ name }}
@@ -8,32 +9,24 @@ package:
 source:
   path: ..
 
-outputs:
-  - name: {{ name }}
-    build:
-      noarch: python
-      script: python -m pip install . -vv
-      entry_points:
-        - aiida_sander=aiida_amber.cli.sander:cli
-        - aiida_tleap=aiida_amber.cli.tleap:cli
-        - aiida_antechamber=aiida_amber.cli.antechamber:cli
-        - aiida_pdb4amber=aiida_amber.cli.pdb4amber:cli
-        - aiida_parmed=aiida_amber.cli.parmed:cli
-    requirements:
-      host:
-        - python >=3.12
-        - pip
-        - flit-core >=4,<5
-      run:
-        - python >=3.12
-        - aiida-core >=2.9.0,<2.10
-        - voluptuous >=0.16.0,<1.0
-        - biosim-extractor >=1.0.0,<2.0
-    about:
-      home: https://github.com/CCPBioSim/aiida-amber
-      license: MIT
-      license_file: LICENSE
-      summary: AiiDA plugin that wraps amber molecular dynamics executables
+build:
+  noarch: python
+  script: python -m pip install . -vv --no-deps
+  entry_points:
+    {% for script, target in pyproject["project"]["scripts"].items() %}
+    - {{ script }}={{ target }}
+    {% endfor %}
+
+requirements:
+  host:
+    - python >=3.12
+    - pip
+    - flit-core >=4,<5
+  run:
+    - python {{ pyproject["project"]["requires-python"] }}
+    {% for dependency in pyproject["project"]["dependencies"] %}
+    - {{ dependency | lower }}
+    {% endfor %}
 
 test:
   imports:
@@ -41,3 +34,9 @@ test:
   commands:
     - aiida_sander --help
     - python -c "import aiida_amber; print(aiida_amber.__version__)"
+
+about:
+  home: https://github.com/CCPBioSim/aiida-amber
+  license: MIT
+  license_file: LICENSE
+  summary: AiiDA plugin that wraps amber molecular dynamics executables
