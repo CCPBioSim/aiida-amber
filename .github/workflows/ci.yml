@@ -14,7 +14,7 @@ permissions:
 jobs:
   tests:
     name: Tests
-    uses: CCPBioSim/.github/.github/workflows/ci-test-conda.yaml@788b8c3e5892a90926a1ee933f029e445bd1dff4 # 0.5.0
+    uses: CCPBioSim/.github/.github/workflows/ci-test-conda.yaml@43d3ed06eb774dfa813173770888a15f554c70cc # 0.6.0
     permissions:
       contents: read
       checks: write
@@ -32,9 +32,31 @@ jobs:
       test-path: .
       timeout-minutes: 30
 
+  lowest-dependencies:
+    name: Lowest dependencies
+    uses: CCPBioSim/.github/.github/workflows/ci-test-conda.yaml@43d3ed06eb774dfa813173770888a15f554c70cc # 0.6.0
+    permissions:
+      contents: read
+      checks: write
+      statuses: write
+    with:
+      package: aiida_amber
+      matrix: >-
+        {
+          "python": ["3.12", "3.14"],
+          "aiida": ["2.9.0"],
+          "ambertools": ["24"]
+        }
+      conda-packages: python={python} aiida-core={aiida} ambertools={ambertools}
+      lowest-dependencies: true
+      coverage: false
+      pytest-args: -s
+      test-path: .
+      timeout-minutes: 30
+
   docs:
     name: Docs
-    uses: CCPBioSim/.github/.github/workflows/ci-docs.yaml@788b8c3e5892a90926a1ee933f029e445bd1dff4 # 0.5.0
+    uses: CCPBioSim/.github/.github/workflows/ci-docs.yaml@43d3ed06eb774dfa813173770888a15f554c70cc # 0.6.0
     permissions:
       contents: read
     with:
@@ -45,9 +67,19 @@ jobs:
 
   pre-commit:
     name: Pre-commit
-    uses: CCPBioSim/.github/.github/workflows/ci-pre-commit.yaml@788b8c3e5892a90926a1ee933f029e445bd1dff4 # 0.5.0
+    uses: CCPBioSim/.github/.github/workflows/ci-pre-commit.yaml@43d3ed06eb774dfa813173770888a15f554c70cc # 0.6.0
     permissions:
       contents: read
     with:
       python-version: "3.15"
       timeout-minutes: 15
+
+  conda-build:
+    name: Conda build
+    uses: CCPBioSim/.github/.github/workflows/ci-conda-build.yaml@43d3ed06eb774dfa813173770888a15f554c70cc # 0.6.0
+    permissions:
+      contents: read
+    with:
+      channels: CCPBioSim,conda-forge
+      python-versions: '["3.12"]'
+      timeout-minutes: 45
