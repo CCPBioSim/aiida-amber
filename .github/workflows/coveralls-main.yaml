@@ -16,20 +16,15 @@ concurrency:
 jobs:
   coveralls:
     name: Build main coverage baseline
-    uses: CCPBioSim/.github/.github/workflows/ci-test-conda.yaml@43d3ed06eb774dfa813173770888a15f554c70cc # 0.6.0
+    uses: CCPBioSim/.github/.github/workflows/ci-test-conda.yaml@f4cec1ba490b4461bfbcfd6362a8587678908a7d # 0.12.0
     permissions:
       contents: read
       checks: write
       statuses: write
     with:
       package: aiida_amber
-      matrix: >-
-        {
-          "python": ["3.12", "3.13", "3.14"],
-          "aiida": ["2.9.0", "2.9.1"],
-          "ambertools": ["24"]
-        }
-      conda-packages: python={python} aiida-core={aiida} ambertools={ambertools}
+      conda-packages: ambertools=24
       pytest-args: -s
       test-path: .
+      coverage: true
       timeout-minutes: 30
