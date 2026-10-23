@@ -1,0 +1,29 @@
+name: Weekly Unit Tests
+
+on:
+  schedule:
+    - cron: '0 8 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: weekly-tests-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  unit:
+    name: Unit
+    uses: CCPBioSim/.github/.github/workflows/ci-test-conda.yaml@f4cec1ba490b4461bfbcfd6362a8587678908a7d # 0.12.0
+    permissions:
+      contents: read
+      checks: write
+      statuses: write
+    with:
+      package: aiida_amber
+      conda-packages: ambertools=24
+      pytest-args: -s
+      test-path: .
+      lowest-dependencies-check: true
+      timeout-minutes: 30
