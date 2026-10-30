@@ -10,20 +10,9 @@
 # All configuration values have a default; values that are commented out
 # serve to show the default.
 
-import os
-import sys
 import time
 
 import aiida_amber
-
-# -- AiiDA-related setup --------------------------------------------------
-
-# If we are not on READTHEDOCS load the Sphinx theme manually
-if not os.environ.get("READTHEDOCS", None):
-    # import sphinx_rtd_theme
-
-    html_theme = "furo"  # "sphinx_rtd_theme"
-    # html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 
 # -- General configuration ------------------------------------------------
 
@@ -42,9 +31,27 @@ extensions = [
     "sphinx.ext.mathjax",
     "sphinx.ext.intersphinx",
     "sphinx.ext.viewcode",
-    "sphinxcontrib.contentui",
-    "aiida.sphinxext",
+    "autoapi.extension",
 ]
+
+# API reference generated from the source by sphinx-autoapi
+autoapi_dirs = ["../../aiida_amber"]
+autoapi_root = "reference"
+autoapi_add_toctree_entry = False
+autoapi_member_order = "groupwise"
+# Include the __init__ docstring, where the constructor arguments are documented
+autoapi_python_class_content = "both"
+autoapi_options = [
+    "members",
+    "undoc-members",
+    "show-inheritance",
+    "show-module-summary",
+]
+
+# Show type hints in the parameter list rather than the signature
+autodoc_typehints = "description"
+add_module_names = False
+python_maximum_signature_line_length = 88
 
 intersphinx_mapping = {
     "python": ("https://docs.python.org/3", None),
@@ -123,8 +130,8 @@ pygments_style = "sphinx"
 #     "display_version": True,
 # }
 
-html_theme = "furo"
-html_logo = "images/amber-BioSimDB-logo.png"
+html_theme = "ccpbiosim_sphinx_theme"
+html_context = {"github_repo": "aiida-amber"}
 # html_title = f"aiida-amber v{release}"
 # html_theme_options = {}
 
@@ -196,73 +203,8 @@ html_search_language = "en"
 # Output file base name for HTML help builder.
 htmlhelp_basename = "aiida-amber-doc"
 
-# Warnings to ignore when using the -n (nitpicky) option
-# We should ignore any python built-in exception, for instance
-nitpick_ignore = [
-    ("py:class", "Logger"),
-    ("py:class", "aiida.orm.fields.QbFields"),
-    ("py:class", "aiida.orm.nodes.data.code.installed.InstalledCode"),
-    ("py:class", "aiida.orm.computers.Computer"),
-    ("py:class", "aiida.engine.processes.calcjobs.calcjob.CalcJob"),
-    ("py:class", "aiida.orm.nodes.data.dict.Dict"),
-    ("py:class", "aiida.parsers.parser.Parser"),
-    ("py:class", "aiida.orm.nodes.data.singlefile.SinglefileData"),
-    ("py:class", "aiida.orm.nodes.process.process.ProcessNode"),
-    ("py:class", "aiida.orm.querybuilder.QueryBuilder"),
-    ("py:class", "aiida.orm.nodes.data.dict.Dict.AttributesModel"),
-    ("py:class", "aiida.orm.nodes.data.dict.Dict.ReadModel"),
-    ("py:class", "aiida.orm.nodes.data.dict.Dict.WriteModel"),
-    ("py:class", "aiida.orm.nodes.data.singlefile.SinglefileData.AttributesModel"),
-    ("py:class", "aiida.orm.nodes.data.singlefile.SinglefileData.ReadModel"),
-    ("py:class", "aiida.orm.nodes.data.singlefile.SinglefileData.WriteModel"),
-]
-
+# AiiDA's documentation does not publish its API for cross-referencing, so
+# references to AiiDA classes cannot be resolved by the nitpicky (-n) build.
 nitpick_ignore_regex = [
-    (
-        r"py:class",
-        r".*\.(AttributesModel|AttributesWriteModel|ReadModel|WriteModel|ConstructorModel|Model)",
-    ),
+    (r"py:.*", r"aiida\..*"),
 ]
-
-
-def run_apidoc(_):
-    """Runs sphinx-apidoc when building the documentation.
-
-    Needs to be done in conf.py in order to include the APIdoc in the
-    build on readthedocs.
-
-    See also https://github.com/rtfd/readthedocs.org/issues/1139
-    """
-    source_dir = os.path.abspath(os.path.dirname(__file__))
-    apidoc_dir = os.path.join(source_dir, "apidoc")
-    package_dir = os.path.join(source_dir, os.pardir, os.pardir, "aiida_amber")
-
-    # In #1139, they suggest the route below, but this ended up
-    # calling sphinx-build, not sphinx-apidoc
-    # from sphinx.apidoc import main
-    # main([None, '-e', '-o', apidoc_dir, package_dir, '--force'])
-
-    import subprocess
-
-    cmd_path = "sphinx-apidoc"
-    if hasattr(sys, "real_prefix"):  # Check to see if we are in a virtualenv
-        # If we are, assemble the path manually
-        cmd_path = os.path.abspath(os.path.join(sys.prefix, "bin", "sphinx-apidoc"))
-
-    options = [
-        "-o",
-        apidoc_dir,
-        package_dir,
-        "--private",
-        "--force",
-        "--no-toc",
-    ]
-
-    # See https://stackoverflow.com/a/30144019
-    env = os.environ.copy()
-    env["SPHINX_APIDOC_OPTIONS"] = "members,special-members,private-members,undoc-members,show-inheritance"
-    subprocess.check_call([cmd_path] + options, env=env)
-
-
-def setup(app):
-    app.connect("builder-inited", run_apidoc)
